@@ -29,3 +29,9 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Generated meeting notes output
+meeting-notes-*.docx
+
+# Claude Code local settings
+.claude/
