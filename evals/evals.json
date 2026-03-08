@@ -1,0 +1,101 @@
+{
+  "skill_name": "meeting-notes-summary",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Hey, can you summarize this meeting transcript for me?\n\nJohn (PM): Alright, let's get started. Today we're reviewing the Q2 product roadmap. Sarah, can you kick us off?\n\nSarah (Design): Sure. So we finished the new onboarding flow mockups last week. I shared them in Figma. The main question is whether we go with the single-page layout or the stepped wizard approach.\n\nJohn: I liked the stepped wizard. It's clearer for new users.\n\nSarah: Agreed. I think we go with that.\n\nDave (Engineering): Works for me. We'll need about two sprints to build it. We should loop in Alex from QA before we finalize specs — he's not on this call but he needs to review the edge cases.\n\nJohn: Good point. Dave, can you reach out to Alex by next Thursday and get his input?\n\nDave: Sure.\n\nSarah: Also — the marketing team asked us to have the landing page copy ready before launch. That's on Maria, who's in marketing. She said she'd have it done by end of March.\n\nJohn: Great. So we're going with the stepped wizard, Dave will talk to Alex, and Maria is handling the landing page copy. Anything else?\n\nDave: One more thing — we need to decide on the analytics vendor. I've been evaluating Mixpanel vs Amplitude. I'd recommend Mixpanel based on pricing.\n\nJohn: Let's go with Mixpanel then. I'll send the approval to procurement today.\n\nSarah: Perfect. I think that's everything.",
+      "expected_output": "A meeting-notes-<date>.docx file with attendees (John, Sarah, Dave present; Alex and Maria not present), meeting purpose (Q2 roadmap review), key decisions (stepped wizard, Mixpanel), and action items for Dave (contact Alex by next Thursday), Maria (landing page copy by end of March), John (procurement approval today).",
+      "files": [],
+      "assertions": [
+        {
+          "id": "docx_produced",
+          "description": "A .docx file is produced as output"
+        },
+        {
+          "id": "attendees_present_correct",
+          "description": "John, Sarah, and Dave are listed as attendees present on the call"
+        },
+        {
+          "id": "nonattendees_flagged",
+          "description": "Alex and Maria are listed as not present (mentioned but not on the call)"
+        },
+        {
+          "id": "key_decisions_captured",
+          "description": "Key decisions include: stepped wizard chosen and Mixpanel chosen"
+        },
+        {
+          "id": "action_items_complete",
+          "description": "Action items exist for Dave (contact Alex), Maria (landing page copy), and John (procurement approval)"
+        },
+        {
+          "id": "deadlines_accurate",
+          "description": "Deadlines match what was stated: Dave by next Thursday, Maria by end of March, John today — no invented deadlines"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Please create meeting notes from this transcript. It's from our weekly standup.\n\nEmma: Morning everyone. Quick update from my side — I finished the API integration for the payments module. All tests are passing.\n\nLiam: Nice. I'm still working on the dashboard redesign. Should be done by Wednesday.\n\nEmma: Liam, can you send me the mockups when they're ready? I need them for the demo on Friday.\n\nLiam: Yeah, I'll send them over Wednesday evening.\n\nEmma: Great. Also — we had a complaint from the client yesterday about slow load times on the reports page. I haven't had a chance to look into it yet.\n\nLiam: I can take that. I'll investigate the performance issue and report back by end of week.\n\nEmma: Thanks. That's it from me. Oh wait — remind Tom (he's on leave this week) that he needs to update the staging environment config before next Monday. Can someone ping him?\n\nLiam: I'll send him a message.\n\nEmma: Perfect. See you tomorrow.",
+      "expected_output": "A meeting-notes-<date>.docx with Emma and Liam as attendees, Tom listed as not present, action items: Liam sends mockups Wednesday evening, Liam investigates load times by end of week, Liam pings Tom, Tom updates staging config before Monday.",
+      "files": [],
+      "assertions": [
+        {
+          "id": "docx_produced",
+          "description": "A .docx file is produced as output"
+        },
+        {
+          "id": "tom_not_present",
+          "description": "Tom is listed as not present (on leave, mentioned but not on the call)"
+        },
+        {
+          "id": "liam_mockups_action",
+          "description": "Action item: Liam sends mockups to Emma by Wednesday evening"
+        },
+        {
+          "id": "liam_performance_action",
+          "description": "Action item: Liam investigates the performance/load time issue, deadline: end of week"
+        },
+        {
+          "id": "tom_staging_action",
+          "description": "Action item: Tom updates the staging environment config before Monday"
+        },
+        {
+          "id": "no_invented_deadlines",
+          "description": "No deadlines are invented — all deadlines present match what was explicitly stated in the transcript"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Summarize this for me:\n\n{\"transcript\": [{\"speaker\": \"Rachel\", \"text\": \"Let's talk about the budget for the new office fit-out. We have $80k approved.\"}, {\"speaker\": \"James\", \"text\": \"I've gotten quotes from two vendors. Vendor A is $72k and includes installation. Vendor B is $65k but we'd handle installation ourselves.\"}, {\"speaker\": \"Rachel\", \"text\": \"What's the installation cost estimate if we go with Vendor B?\"}, {\"speaker\": \"James\", \"text\": \"Probably around $10-12k, so it might end up similar. But Vendor A has a better warranty.\"}, {\"speaker\": \"Rachel\", \"text\": \"Let's go with Vendor A then. Better to have the warranty protection.\"}, {\"speaker\": \"James\", \"text\": \"Agreed. I'll contact Vendor A to confirm and get the contract over by end of next week.\"}, {\"speaker\": \"Rachel\", \"text\": \"Great. Also, Nina from facilities needs to be looped in — she handles the building access for the installation crew. Can you reach out to her?\"}, {\"speaker\": \"James\", \"text\": \"Will do. I'll email Nina this afternoon.\"}, {\"speaker\": \"Rachel\", \"text\": \"Perfect. Let's reconvene once the contract is signed.\"}]}",
+      "expected_output": "A meeting-notes-<date>.docx from a JSON transcript, with Rachel and James as attendees, Nina noted as not present, Vendor A decision captured, and action items: James contacts Vendor A (by end of next week), James emails Nina (this afternoon).",
+      "files": [],
+      "assertions": [
+        {
+          "id": "docx_produced",
+          "description": "A .docx file is produced as output"
+        },
+        {
+          "id": "json_parsed_correctly",
+          "description": "The JSON transcript format was correctly parsed — Rachel and James are identified as speakers/attendees"
+        },
+        {
+          "id": "nina_not_present",
+          "description": "Nina is listed as not present (mentioned but not on the call)"
+        },
+        {
+          "id": "vendor_a_decision",
+          "description": "Key decision: Vendor A was chosen (over Vendor B) for the office fit-out"
+        },
+        {
+          "id": "james_vendor_action",
+          "description": "Action item: James contacts Vendor A and gets the contract — deadline: end of next week"
+        },
+        {
+          "id": "james_nina_action",
+          "description": "Action item: James emails Nina — deadline: this afternoon"
+        }
+      ]
+    }
+  ]
+}
